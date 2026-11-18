@@ -182,28 +182,35 @@
       box-shadow: 0 4px 15px rgba(24, 119, 242, 0.45);
     }
 
+    .circle-btn-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
     /* Zomato portal button */
     .btn-circle-zomato {
-      color: #ff5260;
+      background: transparent;
+      border-color: rgba(226, 55, 68, 0.5);
     }
 
     .btn-circle-zomato:hover {
-      background: #e23744;
-      border-color: #e23744;
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(226, 55, 68, 0.45);
+      border-color: #ff5260;
+      box-shadow: 0 4px 16px rgba(226, 55, 68, 0.6);
     }
 
     /* Dineout portal button */
     .btn-circle-dineout {
-      color: #ff7a59;
+      background: #ffffff;
+      border-color: rgba(255, 90, 95, 0.5);
     }
 
     .btn-circle-dineout:hover {
-      background: #ff5a5f;
       border-color: #ff5a5f;
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(255, 90, 95, 0.45);
+      box-shadow: 0 4px 16px rgba(255, 90, 95, 0.6);
     }
 
     /* Call button */
@@ -236,11 +243,14 @@
     }
 
     /* Google Maps Locate Us button */
+    .btn-circle-maps {
+      background: #ffffff;
+      border-color: rgba(66, 133, 244, 0.5);
+    }
+
     .btn-circle-maps:hover {
-      background: #ea4335;
-      border-color: #ea4335;
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(234, 67, 53, 0.5);
+      border-color: #4285f4;
+      box-shadow: 0 4px 16px rgba(66, 133, 244, 0.6);
     }
 
     /* Coming Soon Badge */
@@ -395,6 +405,17 @@
       color: #ffffff;
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(245, 166, 35, 0.45);
+    }
+
+    .hero-maps-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      background: #ffffff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+      flex-shrink: 0;
     }
 
     /* Filter Bar */
@@ -914,16 +935,12 @@
 
         <!-- Portal Buttons (Coming Soon) -->
         <button type="button" class="btn-circle btn-circle-zomato" id="zomatoBtn" title="Zomato Portal - Coming Soon" aria-label="Zomato (Coming Soon)">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M5 5h14a1 1 0 0 1 1 1c0 .32-.15.63-.4.82L9.2 18H19a1 1 0 0 1 0 2H5a1 1 0 0 1-1-1c0-.32.15-.63.4-.82L14.8 6H5a1 1 0 0 1 0-2z"/>
-          </svg>
+          <img src="zomato-logo.png" alt="Zomato" class="circle-btn-img">
           <span class="badge-soon">Soon</span>
         </button>
 
         <button type="button" class="btn-circle btn-circle-dineout" id="dineoutBtn" title="Dineout Portal - Coming Soon" aria-label="Dineout (Coming Soon)">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
-          </svg>
+          <img src="dineout-logo.png" alt="Dineout" class="circle-btn-img">
           <span class="badge-soon">Soon</span>
         </button>
 
@@ -931,10 +948,7 @@
 
         <!-- Google Maps Locate Us -->
         <a href="https://maps.app.goo.gl/wyLRJv4fc3gwEzGS8" target="_blank" rel="noopener noreferrer" class="btn-circle btn-circle-maps" title="Locate Us on Google Maps" aria-label="Locate Us on Google Maps">
-          <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
+          <img src="maps-logo.png" alt="Google Maps" class="circle-btn-img">
         </a>
 
         <!-- Call, PDF & Share Action Buttons -->
@@ -977,10 +991,7 @@
           <span>WhatsApp Chat</span>
         </a>
         <a href="https://maps.app.goo.gl/wyLRJv4fc3gwEzGS8" target="_blank" rel="noopener noreferrer" class="hero-btn-maps" title="Locate Absolute Bar & Lounge on Google Maps">
-          <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
+          <img src="maps-logo.png" alt="Google Maps" class="hero-maps-icon">
           <span>Locate Us</span>
         </a>
       </div>
@@ -1083,16 +1094,12 @@
       </a>
 
       <button type="button" class="footer-social-pill" id="footerZomatoBtn" title="Zomato Portal (Coming Soon)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M5 5h14a1 1 0 0 1 1 1c0 .32-.15.63-.4.82L9.2 18H19a1 1 0 0 1 0 2H5a1 1 0 0 1-1-1c0-.32.15-.63.4-.82L14.8 6H5a1 1 0 0 1 0-2z"/>
-        </svg>
+        <img src="zomato-logo.png" alt="Zomato" style="width: 16px; height: 16px; border-radius: 50%; object-fit: cover;">
         <span>Zomato (Soon)</span>
       </button>
 
       <button type="button" class="footer-social-pill" id="footerDineoutBtn" title="Dineout Portal (Coming Soon)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
-        </svg>
+        <img src="dineout-logo.png" alt="Dineout" style="width: 16px; height: 16px; border-radius: 50%; object-fit: cover; background: #ffffff;">
         <span>Dineout (Soon)</span>
       </button>
     </div>
@@ -1110,10 +1117,7 @@
       </a>
       <span>&bull;</span>
       <a href="https://maps.app.goo.gl/wyLRJv4fc3gwEzGS8" target="_blank" rel="noopener noreferrer" class="footer-contact-link" style="color: var(--yellow);">
-        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
+        <img src="maps-logo.png" alt="Google Maps" style="width: 16px; height: 16px; border-radius: 50%; object-fit: cover;">
         <span>Locate Us (Google Maps)</span>
       </a>
     </div>
