@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Food & Drinks Menu</title>
+  <meta name="description" content="Browse our delicious food and beverage offerings.">
+  <meta property="og:title" content="Food & Drinks Menu">
+  <meta property="og:description" content="Explore our menu online.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --card-bg: #161a20;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent: #d4af37;
+      --accent-hover: #e5c358;
+      --accent-soft: rgba(212, 175, 55, 0.15);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(180deg, rgba(22, 26, 32, 0.95) 0%, rgba(13, 15, 18, 0.85) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      padding: 16px 20px;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+
+    .brand p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0b0c10;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      border-color: var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Filter Bar */
+    .filter-section {
+      background: var(--bg);
+      padding: 12px 20px;
+      position: sticky;
+      top: 73px;
+      z-index: 30;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .filter-scroll {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+
+    .filter-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-chip {
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .filter-chip:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .filter-chip.active {
+      color: #0b0c10;
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+
+    .menu-stats {
+      margin-bottom: 18px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Menu Grid */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .menu-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+      }
+    }
+
+    .menu-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .card-image-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 916 / 1717;
+      background: #111418;
+      overflow: hidden;
+    }
+
+    .card-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-card:hover .card-image-wrap img {
+      transform: scale(1.02);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.85) 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+
+    .card-info {
+      width: 100%;
+    }
+
+    .card-category-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(212, 175, 55, 0.9);
+      color: #000;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-zoom-hint {
+      font-size: 0.75rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0.9;
+    }
+
+    /* Lightbox Modal */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.94);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      touch-action: manipulation;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 110;
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+    }
+
+    .lightbox-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .lightbox-close {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      transition: background 0.2s;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 95vw;
+      max-height: 86vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 86vh;
+      width: auto;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      user-select: none;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      z-index: 105;
+    }
+
+    .lightbox-nav:hover {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+
+    .lightbox-prev {
+      left: 20px;
+    }
+
+    .lightbox-next {
+      right: 20px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--accent);
+      color: #0b0c10;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 200;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 24px 20px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      background: #090a0d;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <h1>Dining Menu</h1>
+        <p>Food &amp; Beverage Collection</p>
+      </div>
+      <div class="header-actions">
+        <a href="MENU_ABNL.pdf" download="Menu.pdf" class="btn btn-secondary" title="Download Complete Menu PDF">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3" />
+          </svg>
+          <span>PDF Menu</span>
+        </a>
+        <button id="shareBtn" class="btn btn-primary" title="Share link with guests">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+          </svg>
+          <span>Share</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Category Filter Bar -->
+  <section class="filter-section">
+    <div class="filter-scroll" id="filterContainer">
+      <button class="filter-chip active" data-category="all">All Items</button>
+      <button class="filter-chip" data-category="veg-starters">Veg Starters</button>
+      <button class="filter-chip" data-category="non-veg-starters">Non-Veg Starters</button>
+      <button class="filter-chip" data-category="soups-sizzlers">Soups &amp; Sizzlers</button>
+      <button class="filter-chip" data-category="salads">Salads</button>
+      <button class="filter-chip" data-category="veg-main-course">Veg Main Course</button>
+      <button class="filter-chip" data-category="non-veg-main-course">Non-Veg Main Course</button>
+      <button class="filter-chip" data-category="rice-breads">Rice &amp; Breads</button>
+      <button class="filter-chip" data-category="desserts">Desserts</button>
+      <button class="filter-chip" data-category="beverages">Beverages</button>
+    </div>
+  </section>
+
+  <!-- Main Menu Grid -->
+  <main>
+    <div class="menu-stats">
+      <span id="pageCount">Showing all 14 pages</span>
+      <span>Tap any page to view full screen</span>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      <!-- Cards rendered dynamically via JS -->
+    </div>
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-header">
+      <div class="lightbox-title" id="lightboxTitle">Page Details</div>
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    </div>
+    
+    <button class="lightbox-nav lightbox-prev" id="prevBtn" aria-label="Previous page">
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    <div class="lightbox-content">
+      <img src="" alt="Menu Page" class="lightbox-img" id="lightboxImg">
+    </div>
+
+    <button class="lightbox-nav lightbox-next" id="nextBtn" aria-label="Next page">
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">Link copied to clipboard!</div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Enjoy your meal &bull; Share this menu with your friends &amp; family</p>
+  </footer>
+
+  <script>
+    const menuPages = [
+      { id: 1, title: 'Veg Starters (Page 1)', category: 'veg-starters', categoryLabel: 'Veg Starters', file: 'Starters_Veg_Page_1.jpg' },
+      { id: 2, title: 'Veg Starters (Page 2)', category: 'veg-starters', categoryLabel: 'Veg Starters', file: 'Starters_Veg_Page_2.jpg' },
+      { id: 3, title: 'Non-Veg Starters (Part 1)', category: 'non-veg-starters', categoryLabel: 'Non-Veg Starters', file: 'NonVeg Starters.jpg' },
+      { id: 4, title: 'Non-Veg Starters (Part 2)', category: 'non-veg-starters', categoryLabel: 'Non-Veg Starters', file: 'NonVeg Starters1.jpg' },
+      { id: 5, title: 'Non-Veg Starters (Part 3)', category: 'non-veg-starters', categoryLabel: 'Non-Veg Starters', file: 'NonVeg Starters2.jpg' },
+      { id: 6, title: 'Non-Veg Starters (Part 4)', category: 'non-veg-starters', categoryLabel: 'Non-Veg Starters', file: 'NonVeg Starters3.jpg' },
+      { id: 7, title: 'Soups & Sizzlers', category: 'soups-sizzlers', categoryLabel: 'Soups & Sizzlers', file: 'Soups_Sizzlers.jpg' },
+      { id: 8, title: 'Salads', category: 'salads', categoryLabel: 'Salads', file: 'Salads.jpg' },
+      { id: 9, title: 'Veg Main Course', category: 'veg-main-course', categoryLabel: 'Veg Main Course', file: 'Veg Main Course.jpg' },
+      { id: 10, title: 'Non-Veg Main Course (Part 1)', category: 'non-veg-main-course', categoryLabel: 'Non-Veg Main Course', file: 'NVMC.jpg' },
+      { id: 11, title: 'Non-Veg Main Course (Part 2)', category: 'non-veg-main-course', categoryLabel: 'Non-Veg Main Course', file: 'NVMC1.jpg' },
+      { id: 12, title: 'Rice & Breads', category: 'rice-breads', categoryLabel: 'Rice & Breads', file: 'RiceBreads.jpg' },
+      { id: 13, title: 'Desserts', category: 'desserts', categoryLabel: 'Desserts', file: 'Dessert.jpg' },
+      { id: 14, title: 'Beverages', category: 'beverages', categoryLabel: 'Beverages', file: 'Beverages.jpg' }
+    ];
+
+    let currentCategory = 'all';
+    let filteredPages = [...menuPages];
+    let currentIndex = 0;
+
+    const grid = document.getElementById('menuGrid');
+    const pageCountEl = document.getElementById('pageCount');
+    const filterButtons = document.querySelectorAll('.filter-chip');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const shareBtn = document.getElementById('shareBtn');
+    const toast = document.getElementById('toast');
+
+    function renderCards() {
+      grid.innerHTML = '';
+      filteredPages.forEach((page, index) => {
+        const card = document.createElement('div');
+        card.className = 'menu-card';
+        card.innerHTML = `
+          <div class="card-image-wrap">
+            <img src="${encodeURIComponent(page.file)}" alt="${page.title}" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-info">
+                <span class="card-category-badge">${page.categoryLabel}</span>
+                <div class="card-title">
+                  <span>${page.title}</span>
+                  <span class="card-zoom-hint">
+                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                    </svg>
+                    Zoom
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        card.addEventListener('click', () => openLightbox(index));
+        grid.appendChild(card);
+      });
+      pageCountEl.textContent = `Showing ${filteredPages.length} ${filteredPages.length === 1 ? 'page' : 'pages'}`;
+    }
+
+    // Filter logic
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.getAttribute('data-category');
+        currentCategory = cat;
+        if (cat === 'all') {
+          filteredPages = [...menuPages];
+        } else {
+          filteredPages = menuPages.filter(p => p.category === cat);
+        }
+        renderCards();
+      });
+    });
+
+    // Lightbox modal logic
+    function openLightbox(index) {
+      currentIndex = index;
+      updateLightboxContent();
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function updateLightboxContent() {
+      const page = filteredPages[currentIndex];
+      lightboxImg.src = encodeURIComponent(page.file);
+      lightboxTitle.textContent = `${page.title} (${currentIndex + 1}/${filteredPages.length})`;
+    }
+
+    function showPrev() {
+      if (currentIndex > 0) {
+        currentIndex--;
+      } else {
+        currentIndex = filteredPages.length - 1;
+      }
+      updateLightboxContent();
+    }
+
+    function showNext() {
+      if (currentIndex < filteredPages.length - 1) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+      updateLightboxContent();
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+        closeLightbox();
+      }
+    });
+
+    // Keyboard support
+    window.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    });
+
+    // Share button
+    shareBtn.addEventListener('click', async () => {
+      const shareData = {
+        title: 'Food & Drinks Menu',
+        text: 'Check out the food and beverage menu!',
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+        } catch (err) {
+          // User cancelled or share failed
+        }
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          showToast('Menu link copied to clipboard!');
+        }).catch(() => {
+          showToast('Failed to copy link');
+        });
+      }
+    });
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // Initialize
+    renderCards();
+  </script>
+</body>
+</html>
