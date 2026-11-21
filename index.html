@@ -50,6 +50,13 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    html {
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: radial-gradient(ellipse at 50% 0%, #2f060c 0%, #1a0307 45%, #0e0204 100%);
@@ -59,7 +66,19 @@
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
+      width: 100%;
+      max-width: 100%;
       padding-bottom: 95px; /* Space for mobile floating buttons */
+    }
+
+    header,
+    section,
+    main,
+    footer {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     /* Header */
@@ -77,11 +96,13 @@
 
     .header-inner {
       max-width: 1200px;
+      width: 100%;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
+      min-width: 0;
     }
 
     .brand-link {
@@ -277,12 +298,18 @@
       header {
         padding: 10px 12px;
       }
+      .brand-link {
+        flex-shrink: 0;
+      }
       .header-actions {
         gap: 6px;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        max-width: calc(100vw - 110px);
+        max-width: calc(100% - 95px);
+        flex: 1;
+        min-width: 0;
+        justify-content: flex-end;
         padding-bottom: 2px;
       }
       .header-actions::-webkit-scrollbar {
@@ -334,10 +361,12 @@
 
     .hero-inner {
       max-width: 600px;
+      width: 100%;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-width: 0;
     }
 
     .hero-contact-row {
@@ -438,16 +467,24 @@
       top: 67px;
       z-index: 30;
       border-bottom: 1px solid var(--gold-border);
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
     }
 
     .filter-scroll {
       max-width: 1200px;
+      width: 100%;
       margin: 0 auto;
       display: flex;
       gap: 8px;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       padding-bottom: 2px;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .filter-scroll::-webkit-scrollbar {
@@ -465,6 +502,7 @@
       cursor: pointer;
       white-space: nowrap;
       transition: all 0.2s ease;
+      flex-shrink: 0;
     }
 
     .filter-chip:hover {
@@ -488,6 +526,15 @@
       width: 100%;
       margin: 0 auto;
       padding: 24px 20px 40px;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    #foodMenuView,
+    #liquorMenuView {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
     }
 
     .menu-stats {
@@ -509,6 +556,8 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 22px;
+      width: 100%;
+      min-width: 0;
     }
 
     @media (min-width: 768px) {
@@ -1207,14 +1256,21 @@
       top: 130px;
       z-index: 30;
       border-bottom: 1px solid var(--gold-border);
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
     }
 
     .liquor-controls-wrap {
       max-width: 1200px;
+      width: 100%;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .liquor-search-row {
@@ -1222,11 +1278,14 @@
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
     }
 
     .liquor-search-box {
       flex: 1;
-      min-width: 240px;
+      min-width: 200px;
       position: relative;
       display: flex;
       align-items: center;
@@ -1314,8 +1373,13 @@
       align-items: center;
       gap: 8px;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       padding-bottom: 2px;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .liquor-origin-row::-webkit-scrollbar {
@@ -1334,6 +1398,7 @@
       white-space: nowrap;
       transition: all 0.2s ease;
       font-family: inherit;
+      flex-shrink: 0;
     }
 
     .liquor-origin-pill:hover {
@@ -1359,6 +1424,8 @@
       flex-wrap: wrap;
       gap: 12px;
       font-size: 0.88rem;
+      width: 100%;
+      min-width: 0;
     }
 
     .liquor-stats-left {
@@ -1427,6 +1494,8 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
       gap: 18px;
+      width: 100%;
+      min-width: 0;
     }
 
     @media (min-width: 768px) {
@@ -1961,6 +2030,44 @@
       .filter-section, .liquor-filter-section {
         top: 118px;
         padding: 10px 14px;
+      }
+      main {
+        padding: 16px 14px 32px;
+      }
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .liquor-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .liquor-search-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+      .liquor-search-box {
+        min-width: 0;
+        width: 100%;
+      }
+      .liquor-sort-wrap {
+        width: 100%;
+      }
+      .liquor-sort-select {
+        width: 100%;
+      }
+      .hero-contact-row {
+        flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+        gap: 8px;
+      }
+      .hero-btn-call,
+      .hero-btn-whatsapp,
+      .hero-btn-maps {
+        width: 100%;
+        justify-content: center;
       }
       .age-modal-card {
         padding: 24px 20px 20px;
