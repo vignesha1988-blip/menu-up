@@ -1868,10 +1868,14 @@
       font-weight: 500;
       outline: none;
       cursor: pointer;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
       transition: all 0.2s ease;
+    }
+
+    .age-select-input::-ms-expand {
+      display: none;
     }
 
     .age-select-input:focus {
@@ -2186,9 +2190,19 @@
       .age-modal-card {
         padding: 24px 20px 20px;
       }
-      .age-select-input, .age-phone-input {
-        padding: 12px 14px;
+      .age-select-input {
+        padding: 12px 36px 12px 14px;
         font-size: 0.88rem;
+      }
+      .age-phone-prefix {
+        padding: 12px 10px;
+        font-size: 0.86rem;
+        flex-shrink: 0;
+      }
+      .age-phone-input {
+        padding: 12px 10px;
+        font-size: 0.88rem;
+        min-width: 0;
       }
       .age-btn-enter {
         padding: 14px;
