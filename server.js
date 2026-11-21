@@ -560,7 +560,8 @@ const server = http.createServer(async (req, res) => {
   }
 
   // --- STATIC FILE SERVING ---
-  let filePath = path.join(__dirname, pathname === '/' ? 'index.html' : pathname);
+  const decodedPath = decodeURIComponent(pathname);
+  let filePath = path.join(__dirname, decodedPath === '/' ? 'index.html' : decodedPath);
   const ext = path.extname(filePath).toLowerCase();
 
   fs.stat(filePath, (err, stats) => {
