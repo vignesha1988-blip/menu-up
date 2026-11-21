@@ -728,18 +728,19 @@
 
     @media (max-width: 480px) {
       .floating-contact-bar {
-        bottom: 16px;
-        right: 16px;
-        left: 16px;
+        bottom: 14px;
+        right: 12px;
+        left: 12px;
         flex-direction: row;
         justify-content: stretch;
-        gap: 8px;
+        gap: 6px;
       }
       .fab-btn {
         flex: 1;
         justify-content: center;
-        padding: 10px 12px;
-        font-size: 0.84rem;
+        padding: 9px 6px;
+        font-size: 0.78rem;
+        gap: 5px;
       }
     }
 
@@ -2153,6 +2154,516 @@
       margin-top: 10px;
     }
 
+    /* ========================================================
+       Table Reservation (Book Now) System Styles
+       ======================================================== */
+    .btn-book-header {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--yellow) 100%);
+      color: var(--maroon-darkest);
+      border: 1px solid var(--gold-light);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .btn-book-header:hover {
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--yellow-bright) 100%);
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 6px 16px rgba(245, 166, 35, 0.5);
+    }
+
+    .hero-btn-book {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--maroon-darkest);
+      background: linear-gradient(135deg, #d4af37 0%, #ffbe3b 50%, #f5a623 100%);
+      border: 1.5px solid #fff2b8;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+    }
+    .hero-btn-book:hover {
+      background: linear-gradient(135deg, #f7e7a9 0%, #ffcf55 100%);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 26px rgba(245, 166, 35, 0.65);
+    }
+    .hero-btn-book .hero-book-pill {
+      background: rgba(14, 2, 4, 0.85);
+      color: #f7e7a9;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 12px;
+      margin-left: 2px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .fab-book {
+      background: linear-gradient(135deg, #d4af37 0%, #f5a623 100%);
+      color: #120205;
+      border: 1.5px solid #fff2b8;
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.5);
+      cursor: pointer;
+    }
+    .fab-book:hover {
+      background: linear-gradient(135deg, #f7e7a9 0%, #ffbe3b 100%);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 12px 28px rgba(212, 175, 55, 0.7);
+    }
+
+    /* Modal Overlay & Card */
+    .res-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 1, 3, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 260;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-y: auto;
+    }
+    .res-modal-overlay.active {
+      display: flex;
+    }
+
+    .res-modal-card {
+      background: linear-gradient(180deg, #1f0408 0%, #110204 100%);
+      border: 1.5px solid var(--gold);
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      padding: 28px 26px 24px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.22);
+      position: relative;
+      animation: modalFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--text);
+      max-height: 92vh;
+      overflow-y: auto;
+    }
+    .res-modal-card::-webkit-scrollbar {
+      width: 6px;
+    }
+    .res-modal-card::-webkit-scrollbar-thumb {
+      background: var(--gold-border);
+      border-radius: 4px;
+    }
+
+    .res-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--gold-border);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .res-close-btn:hover {
+      background: rgba(220, 38, 38, 0.2);
+      color: #ffffff;
+      border-color: #ef4444;
+      transform: scale(1.05);
+    }
+
+    .res-modal-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .res-badge-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--maroon-primary) 0%, #2f060c 100%);
+      border: 1.5px solid var(--gold);
+      color: var(--gold-light);
+      font-size: 20px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.25);
+    }
+    .res-modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .res-modal-subtitle {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    /* Stepper Bar */
+    .res-stepper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--gold-border);
+    }
+    .res-step-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .res-step-pill.active {
+      background: rgba(212, 175, 55, 0.18);
+      color: var(--gold-light);
+      border-color: var(--gold);
+    }
+    .res-step-pill.completed {
+      background: rgba(37, 211, 102, 0.15);
+      color: #25D366;
+      border-color: rgba(37, 211, 102, 0.4);
+    }
+
+    /* Form Fields */
+    .res-form-group {
+      margin-bottom: 16px;
+    }
+    .res-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+    .res-label span.req {
+      color: #ff6b6b;
+      margin-left: 2px;
+    }
+    .res-input, .res-select {
+      width: 100%;
+      box-sizing: border-box;
+      background: rgba(14, 2, 4, 0.85);
+      border: 1.5px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--text);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .res-input:focus, .res-select:focus {
+      border-color: var(--yellow-bright);
+      background: rgba(25, 4, 8, 0.95);
+      box-shadow: 0 0 16px rgba(245, 166, 35, 0.35);
+    }
+    .res-select option {
+      background: #190306;
+      color: var(--text);
+      padding: 8px;
+    }
+
+    /* Guest count chips */
+    .res-chips-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .res-chip {
+      padding: 6px 13px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid rgba(212, 175, 55, 0.25);
+      border-radius: 20px;
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .res-chip:hover {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.12);
+    }
+    .res-chip.active {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--yellow) 100%);
+      color: var(--maroon-darkest);
+      border-color: var(--yellow-bright);
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(245, 166, 35, 0.35);
+    }
+
+    /* Grid row for Date & Time */
+    .res-grid-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Phone Input Wrap */
+    .res-phone-wrap {
+      display: flex;
+      border: 1.5px solid var(--gold-border);
+      border-radius: 12px;
+      background: rgba(14, 2, 4, 0.85);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .res-phone-wrap:focus-within {
+      border-color: var(--yellow-bright);
+      box-shadow: 0 0 16px rgba(245, 166, 35, 0.35);
+    }
+    .res-phone-prefix {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0 12px;
+      background: rgba(212, 175, 55, 0.12);
+      border-right: 1px solid var(--gold-border);
+      color: var(--gold-light);
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+    .res-phone-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+      letter-spacing: 0.5px;
+    }
+
+    /* Submit Button */
+    .res-btn-primary {
+      width: 100%;
+      background: linear-gradient(135deg, #d4af37 0%, #ffbe3b 50%, #f5a623 100%);
+      color: var(--maroon-darkest);
+      border: 1.5px solid #fff2b8;
+      border-radius: 14px;
+      padding: 13px 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-top: 10px;
+    }
+    .res-btn-primary:hover:not(:disabled) {
+      background: linear-gradient(135deg, #f7e7a9 0%, #ffcf55 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(245, 166, 35, 0.65);
+    }
+    .res-btn-primary:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Secondary / Back Button */
+    .res-btn-secondary {
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 12px;
+      padding: 10px 16px;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.18s ease;
+    }
+    .res-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      border-color: var(--gold);
+    }
+
+    /* Error Message Box */
+    .res-error-box {
+      background: rgba(220, 38, 38, 0.18);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.4;
+    }
+
+    /* OTP Screen Specifics */
+    .res-otp-hero {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .res-otp-phone-display {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--yellow-bright);
+      margin: 8px 0 4px;
+      letter-spacing: 0.5px;
+    }
+    .res-change-phone-btn {
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 2px 6px;
+    }
+    .res-otp-input {
+      width: 100%;
+      max-width: 240px;
+      margin: 0 auto 16px;
+      display: block;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 12px;
+      padding: 12px 14px;
+      border: 2px solid var(--gold);
+      background: rgba(14, 2, 4, 0.9);
+      border-radius: 14px;
+      color: var(--yellow-bright);
+      outline: none;
+    }
+    .res-otp-input:focus {
+      border-color: var(--yellow-bright);
+      box-shadow: 0 0 24px rgba(245, 166, 35, 0.5);
+    }
+
+    /* Confirmation Screen */
+    .res-confirm-hero {
+      text-align: center;
+      padding: 12px 0 20px;
+    }
+    .res-check-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(37, 211, 102, 0.15);
+      border: 2px solid #25D366;
+      color: #25D366;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 24px rgba(37, 211, 102, 0.35);
+      animation: checkPulse 1.8s infinite;
+    }
+    @keyframes checkPulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+    .res-bkg-id-wrap {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.14);
+      border: 1px dashed var(--gold);
+      border-radius: 10px;
+      padding: 6px 16px;
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #f7e7a9;
+      margin: 10px 0;
+      letter-spacing: 2px;
+    }
+    .res-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .res-summary-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+      font-size: 0.88rem;
+    }
+    .res-summary-table td.lbl {
+      color: var(--gold-light);
+      font-weight: 700;
+      width: 40%;
+    }
+    .res-summary-table td.val {
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .res-summary-table tr:last-child td {
+      border-bottom: none;
+    }
+    .res-confirm-wa-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: linear-gradient(135deg, #25D366 0%, #1ea951 100%);
+      color: #ffffff;
+      font-weight: 800;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+      transition: all 0.2s ease;
+    }
+    .res-confirm-wa-btn:hover {
+      background: linear-gradient(135deg, #2ae06f 0%, #1c9b4a 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+    }
+
     @media (max-width: 520px) {
       .menu-switcher-section {
         padding: 10px 14px;
@@ -2199,9 +2710,17 @@
       }
       .hero-btn-call,
       .hero-btn-whatsapp,
-      .hero-btn-maps {
+      .hero-btn-maps,
+      .hero-btn-book {
         width: 100%;
         justify-content: center;
+      }
+      .res-grid-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .res-modal-card {
+        padding: 22px 18px 18px;
       }
       .age-modal-card {
         padding: 24px 20px 20px;
@@ -2266,6 +2785,17 @@
           <span class="badge-soon">Soon</span>
         </button>
 
+        <!-- Book Table Header Button -->
+        <button type="button" class="btn-book-header" id="headerBookBtn" title="Reserve a Table at Absolute Bar & Lounge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Book Now</span>
+        </button>
+
         <div class="header-divider"></div>
 
         <!-- Google Maps Locate Us -->
@@ -2300,6 +2830,16 @@
     <div class="hero-inner">
       <!-- Call & WhatsApp Hero Buttons -->
       <div class="hero-contact-row">
+        <button type="button" class="hero-btn-book" id="heroBookTableBtn" title="Reserve a Table at Absolute Bar & Lounge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Book a Table</span>
+          <span class="hero-book-pill">Instant OTP</span>
+        </button>
         <a href="tel:+918110003883" class="hero-btn-call" title="Call +91 8110003883">
           <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.3">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -2463,8 +3003,17 @@
     </div>
   </main>
 
-  <!-- Floating Call & WhatsApp FAB for Mobile & Desktop -->
+  <!-- Floating Call, WhatsApp & Book Table FAB for Mobile & Desktop -->
   <div class="floating-contact-bar" id="floatingContactBar">
+    <button type="button" class="fab-btn fab-book" id="fabBookBtn" title="Book a Table at Absolute Bar & Lounge">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      <span>Book Table</span>
+    </button>
     <a href="tel:+918110003883" class="fab-btn fab-call" title="Call +91 8110003883">
       <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.3">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -2539,6 +3088,191 @@
     </div>
   </div>
 
+
+  <!-- Table Reservation Modal (Book Now) -->
+  <div class="res-modal-overlay" id="reservationModalOverlay" role="dialog" aria-modal="true" aria-labelledby="resModalTitle">
+    <div class="res-modal-card">
+      <button type="button" class="res-close-btn" id="btnResCloseModal" title="Close Reservation Window" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="res-modal-header">
+        <div class="res-badge-icon">📅</div>
+        <h2 class="res-modal-title" id="resModalTitle">Reserve a Table</h2>
+        <p class="res-modal-subtitle">Absolute Bar &amp; Lounge &bull; VIP Dining Experience</p>
+      </div>
+
+      <!-- Stepper Indicator -->
+      <div class="res-stepper">
+        <span class="res-step-pill active" id="resPillStep1">1. Details</span>
+        <span class="res-step-pill" id="resPillStep2">2. SMS OTP</span>
+        <span class="res-step-pill" id="resPillStep3">3. Confirmed</span>
+      </div>
+
+      <!-- Error Alert Box -->
+      <div class="res-error-box" id="resErrorBox" style="display: none;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span id="resErrorMsg">Please check your reservation details.</span>
+      </div>
+
+      <!-- STEP 1: Details Form -->
+      <div id="resStepDetails">
+        <div class="res-form-group">
+          <label class="res-label" for="resGuestName">Full Name <span class="req">*</span></label>
+          <input type="text" id="resGuestName" class="res-input" placeholder="e.g. Rahul Sharma" autocomplete="name" required>
+        </div>
+
+        <div class="res-form-group">
+          <label class="res-label">Number of Guests <span class="req">*</span></label>
+          <div class="res-chips-grid" id="resGuestChips">
+            <button type="button" class="res-chip" data-guests="1">1 Guest</button>
+            <button type="button" class="res-chip active" data-guests="2">2 Guests</button>
+            <button type="button" class="res-chip" data-guests="3">3 Guests</button>
+            <button type="button" class="res-chip" data-guests="4">4 Guests</button>
+            <button type="button" class="res-chip" data-guests="5">5 Guests</button>
+            <button type="button" class="res-chip" data-guests="6">6 Guests</button>
+            <button type="button" class="res-chip" data-guests="8">8 Guests</button>
+            <button type="button" class="res-chip" data-guests="10">10+ Guests</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <input type="number" id="resGuestCount" class="res-input" min="1" max="50" value="2" placeholder="Custom" style="max-width: 140px; padding: 9px 12px; font-size: 0.88rem;">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Guests (1 to 50)</span>
+          </div>
+        </div>
+
+        <div class="res-grid-row res-form-group">
+          <div>
+            <label class="res-label" for="resDateInput">Date of Reservation <span class="req">*</span></label>
+            <input type="date" id="resDateInput" class="res-input" required>
+          </div>
+          <div>
+            <label class="res-label" for="resTimeSlot">Time Slot (30-min slots) <span class="req">*</span></label>
+            <select id="resTimeSlot" class="res-select" required>
+              <optgroup label="Lunch / Afternoon">
+                <option value="11:00 AM">11:00 AM</option>
+                <option value="11:30 AM">11:30 AM</option>
+                <option value="12:00 PM">12:00 PM</option>
+                <option value="12:30 PM">12:30 PM</option>
+                <option value="01:00 PM">01:00 PM</option>
+                <option value="01:30 PM">01:30 PM</option>
+                <option value="02:00 PM">02:00 PM</option>
+                <option value="02:30 PM">02:30 PM</option>
+                <option value="03:00 PM">03:00 PM</option>
+                <option value="03:30 PM">03:30 PM</option>
+                <option value="04:00 PM">04:00 PM</option>
+                <option value="04:30 PM">04:30 PM</option>
+              </optgroup>
+              <optgroup label="Evening / Dinner">
+                <option value="05:00 PM">05:00 PM</option>
+                <option value="05:30 PM">05:30 PM</option>
+                <option value="06:00 PM">06:00 PM</option>
+                <option value="06:30 PM">06:30 PM</option>
+                <option value="07:00 PM">07:00 PM</option>
+                <option value="07:30 PM" selected>07:30 PM (Prime Dinner)</option>
+                <option value="08:00 PM">08:00 PM</option>
+                <option value="08:30 PM">08:30 PM</option>
+                <option value="09:00 PM">09:00 PM</option>
+                <option value="09:30 PM">09:30 PM</option>
+                <option value="10:00 PM">10:00 PM</option>
+                <option value="10:30 PM">10:30 PM</option>
+                <option value="11:00 PM">11:00 PM</option>
+                <option value="11:30 PM">11:30 PM</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+
+        <div class="res-form-group">
+          <label class="res-label" for="resMobileInput">Mobile Number (For SMS Confirmation) <span class="req">*</span></label>
+          <div class="res-phone-wrap">
+            <span class="res-phone-prefix">🇮🇳 +91</span>
+            <input type="tel" id="resMobileInput" class="res-phone-input" placeholder="Enter 10-digit mobile number" maxlength="10" inputmode="tel" required>
+          </div>
+          <span style="display:block; font-size:0.72rem; color:var(--text-muted); margin-top:4px;">We will send a 4-digit SMS OTP to confirm this reservation.</span>
+        </div>
+
+        <div class="res-form-group">
+          <label class="res-label" for="resSpecialRequests">Special Requests / Seating (Optional)</label>
+          <input type="text" id="resSpecialRequests" class="res-input" placeholder="e.g. Birthday celebration, Window table, Cozy lounge seating">
+        </div>
+
+        <button type="button" class="res-btn-primary" id="btnResProceed">PROCEED TO VERIFY &amp; BOOK &rarr;</button>
+      </div>
+
+      <!-- STEP 2: OTP Verification -->
+      <div id="resStepOtp" style="display: none;">
+        <div class="res-otp-hero">
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin: 0;">We sent a 4-digit verification code via SMS to:</p>
+          <div class="res-otp-phone-display" id="resOtpPhoneDisplay">+91 ••••• •••••</div>
+          <button type="button" class="res-change-phone-btn" id="btnResChangePhone">&larr; Edit mobile number</button>
+        </div>
+
+        <div style="text-align: center; margin: 18px 0;">
+          <input type="text" id="resOtpInput" class="res-otp-input" placeholder="••••" maxlength="4" inputmode="numeric" autocomplete="one-time-code">
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; margin-bottom: 16px; padding: 0 4px;">
+          <span id="resResendTimer" style="color: var(--text-muted);">Resend code in <strong id="resResendCountdown" style="color: var(--yellow);">45s</strong></span>
+          <button type="button" id="btnResResendOtp" style="display: none; background: none; border: none; color: var(--yellow-bright); text-decoration: underline; font-size: 0.82rem; cursor: pointer; font-weight: 700;">Resend OTP</button>
+        </div>
+
+        <button type="button" class="res-btn-primary" id="btnResVerify">VERIFY &amp; CONFIRM TABLE</button>
+        <button type="button" class="res-btn-secondary" id="btnResBackToDetails">&larr; Back to Details</button>
+      </div>
+
+      <!-- STEP 3: Confirmed Screen -->
+      <div id="resStepConfirmed" style="display: none;">
+        <div class="res-confirm-hero">
+          <div class="res-check-icon">✓</div>
+          <h3 style="font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold-light); margin: 0 0 6px;">Reservation Confirmed!</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">We have received your reservation request and dispatched notifications to our lounge managers.</p>
+          <div class="res-bkg-id-wrap">
+            Booking ID: <span id="resConfirmedBookingId">ABNL-XXXXX</span>
+          </div>
+        </div>
+
+        <table class="res-summary-table">
+          <tr>
+            <td class="lbl">Guest Name</td>
+            <td class="val" id="resSumName">-</td>
+          </tr>
+          <tr>
+            <td class="lbl">Guests</td>
+            <td class="val" id="resSumGuests">-</td>
+          </tr>
+          <tr>
+            <td class="lbl">Date</td>
+            <td class="val" id="resSumDate">-</td>
+          </tr>
+          <tr>
+            <td class="lbl">Time Slot</td>
+            <td class="val" id="resSumTime">-</td>
+          </tr>
+          <tr>
+            <td class="lbl">Mobile</td>
+            <td class="val" id="resSumMobile">-</td>
+          </tr>
+        </table>
+
+        <a href="#" id="resWhatsappShareBtn" target="_blank" rel="noopener noreferrer" class="res-confirm-wa-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.044c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-10.416c-4.406 0-7.989 3.582-7.99 7.99 0 1.41.368 2.784 1.066 3.993l-1.134 4.143 4.241-1.113c1.168.637 2.483.973 3.817.973 4.407 0 7.99-3.583 7.99-7.991 0-4.408-3.583-7.996-7.99-7.996z"/>
+          </svg>
+          <span>Chat with Lounge on WhatsApp</span>
+        </a>
+
+        <button type="button" class="res-btn-secondary" id="btnResDone" style="margin-top: 12px;">Done &bull; Return to Menu</button>
+      </div>
+
+    </div>
+  </div>
 
   <!-- Age Verification Modal (Matches User Reference) -->
   <div class="age-modal-overlay" id="ageModalOverlay" role="dialog" aria-modal="true" aria-labelledby="ageModalHeading">
@@ -3659,17 +4393,425 @@
       });
     }
 
-    if (dineoutBtn) {
-      dineoutBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        showToast('Dineout table booking is coming soon!');
+    // ========================================================
+    // Table Reservation (Book Now) System Logic
+    // ========================================================
+    const resModalOverlay = document.getElementById('reservationModalOverlay');
+    const btnResCloseModal = document.getElementById('btnResCloseModal');
+    const heroBookTableBtn = document.getElementById('heroBookTableBtn');
+    const headerBookBtn = document.getElementById('headerBookBtn');
+    const fabBookBtn = document.getElementById('fabBookBtn');
+
+    const resStepDetails = document.getElementById('resStepDetails');
+    const resStepOtp = document.getElementById('resStepOtp');
+    const resStepConfirmed = document.getElementById('resStepConfirmed');
+
+    const resPillStep1 = document.getElementById('resPillStep1');
+    const resPillStep2 = document.getElementById('resPillStep2');
+    const resPillStep3 = document.getElementById('resPillStep3');
+
+    const resErrorBox = document.getElementById('resErrorBox');
+    const resErrorMsg = document.getElementById('resErrorMsg');
+
+    const resGuestName = document.getElementById('resGuestName');
+    const resGuestCount = document.getElementById('resGuestCount');
+    const resGuestChips = document.querySelectorAll('#resGuestChips .res-chip');
+    const resDateInput = document.getElementById('resDateInput');
+    const resTimeSlot = document.getElementById('resTimeSlot');
+    const resMobileInput = document.getElementById('resMobileInput');
+    const resSpecialRequests = document.getElementById('resSpecialRequests');
+
+    const btnResProceed = document.getElementById('btnResProceed');
+    const resOtpInput = document.getElementById('resOtpInput');
+    const resOtpPhoneDisplay = document.getElementById('resOtpPhoneDisplay');
+    const btnResChangePhone = document.getElementById('btnResChangePhone');
+    const btnResResendOtp = document.getElementById('btnResResendOtp');
+    const resResendTimer = document.getElementById('resResendTimer');
+    const resResendCountdown = document.getElementById('resResendCountdown');
+    const btnResVerify = document.getElementById('btnResVerify');
+    const btnResBackToDetails = document.getElementById('btnResBackToDetails');
+
+    const resConfirmedBookingId = document.getElementById('resConfirmedBookingId');
+    const resSumName = document.getElementById('resSumName');
+    const resSumGuests = document.getElementById('resSumGuests');
+    const resSumDate = document.getElementById('resSumDate');
+    const resSumTime = document.getElementById('resSumTime');
+    const resSumMobile = document.getElementById('resSumMobile');
+    const resWhatsappShareBtn = document.getElementById('resWhatsappShareBtn');
+    const btnResDone = document.getElementById('btnResDone');
+
+    let resCurrentPhone = '';
+    let resVerificationToken = '';
+    let resResendInterval = null;
+
+    function showResError(msg) {
+      if (resErrorBox && resErrorMsg) {
+        resErrorMsg.textContent = msg;
+        resErrorBox.style.display = 'flex';
+      }
+    }
+
+    function hideResError() {
+      if (resErrorBox) {
+        resErrorBox.style.display = 'none';
+      }
+    }
+
+    function initReservationDatePicker() {
+      if (!resDateInput) return;
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      const todayStr = `${yyyy}-${mm}-${dd}`;
+      resDateInput.min = todayStr;
+      if (!resDateInput.value) {
+        resDateInput.value = todayStr;
+      }
+    }
+
+    function openReservationModal() {
+      hideResError();
+      initReservationDatePicker();
+      if (resStepDetails) resStepDetails.style.display = 'block';
+      if (resStepOtp) resStepOtp.style.display = 'none';
+      if (resStepConfirmed) resStepConfirmed.style.display = 'none';
+
+      if (resPillStep1) { resPillStep1.className = 'res-step-pill active'; }
+      if (resPillStep2) { resPillStep2.className = 'res-step-pill'; }
+      if (resPillStep3) { resPillStep3.className = 'res-step-pill'; }
+
+      // Pre-fill phone if verified earlier
+      const savedPhone = localStorage.getItem('abnl_verified_phone') || sessionStorage.getItem('abnl_verified_phone');
+      if (savedPhone && resMobileInput && !resMobileInput.value) {
+        resMobileInput.value = savedPhone;
+      }
+
+      if (resModalOverlay) {
+        resModalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      setTimeout(() => {
+        if (resGuestName && !resGuestName.value) resGuestName.focus();
+      }, 150);
+    }
+
+    function closeReservationModal() {
+      if (resModalOverlay) {
+        resModalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      clearInterval(resResendInterval);
+      hideResError();
+    }
+
+    // Guest chips click handler
+    if (resGuestChips) {
+      resGuestChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          resGuestChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          const count = chip.getAttribute('data-guests');
+          if (resGuestCount) resGuestCount.value = count;
+        });
       });
     }
 
+    if (resGuestCount) {
+      resGuestCount.addEventListener('input', () => {
+        const val = resGuestCount.value;
+        resGuestChips.forEach(c => {
+          if (c.getAttribute('data-guests') === val) {
+            c.classList.add('active');
+          } else {
+            c.classList.remove('active');
+          }
+        });
+      });
+    }
+
+    function startResResendTimer() {
+      clearInterval(resResendInterval);
+      let countdown = 45;
+      if (resResendCountdown) resResendCountdown.textContent = `${countdown}s`;
+      if (resResendTimer) resResendTimer.style.display = 'inline';
+      if (btnResResendOtp) btnResResendOtp.style.display = 'none';
+
+      resResendInterval = setInterval(() => {
+        countdown--;
+        if (resResendCountdown) resResendCountdown.textContent = `${countdown}s`;
+        if (countdown <= 0) {
+          clearInterval(resResendInterval);
+          if (resResendTimer) resResendTimer.style.display = 'none';
+          if (btnResResendOtp) btnResResendOtp.style.display = 'inline';
+        }
+      }, 1000);
+    }
+
+    // Handle Step 1 -> Send OTP
+    async function handleProceedReservation() {
+      hideResError();
+      const name = resGuestName ? resGuestName.value.trim() : '';
+      if (!name || name.length < 2) {
+        showResError('Please enter your full name.');
+        if (resGuestName) resGuestName.focus();
+        return;
+      }
+
+      const guests = resGuestCount ? parseInt(resGuestCount.value, 10) : 2;
+      if (isNaN(guests) || guests < 1) {
+        showResError('Please specify the number of guests (minimum 1).');
+        return;
+      }
+
+      const date = resDateInput ? resDateInput.value : '';
+      if (!date) {
+        showResError('Please choose a reservation date.');
+        return;
+      }
+
+      const time = resTimeSlot ? resTimeSlot.value : '';
+      if (!time) {
+        showResError('Please select a preferred time slot.');
+        return;
+      }
+
+      const rawPhone = resMobileInput ? resMobileInput.value.replace(/\D/g, '') : '';
+      let cleanPhone = rawPhone;
+      if (cleanPhone.length === 12 && cleanPhone.startsWith('91')) cleanPhone = cleanPhone.slice(2);
+      if (cleanPhone.length !== 10 || !/^[6-9]\d{9}$/.test(cleanPhone)) {
+        showResError('Please enter a valid 10-digit Indian mobile number (starting with 6, 7, 8, or 9).');
+        if (resMobileInput) resMobileInput.focus();
+        return;
+      }
+
+      resCurrentPhone = cleanPhone;
+      if (btnResProceed) {
+        btnResProceed.disabled = true;
+        btnResProceed.textContent = 'SENDING OTP...';
+      }
+
+      try {
+        const res = await fetch('/api/send-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ mobile: '91' + cleanPhone })
+        });
+        const data = await res.json();
+
+        if (data && data.success) {
+          resVerificationToken = data.verificationToken || '';
+          if (resStepDetails) resStepDetails.style.display = 'none';
+          if (resStepOtp) resStepOtp.style.display = 'block';
+
+          if (resPillStep1) resPillStep1.className = 'res-step-pill completed';
+          if (resPillStep2) resPillStep2.className = 'res-step-pill active';
+
+          if (resOtpPhoneDisplay) {
+            resOtpPhoneDisplay.textContent = `+91 ${cleanPhone.slice(0, 5)} ${cleanPhone.slice(5)}`;
+          }
+          if (resOtpInput) {
+            resOtpInput.value = '';
+            setTimeout(() => resOtpInput.focus(), 150);
+          }
+          startResResendTimer();
+          showToast('OTP sent to +91 ' + cleanPhone);
+        } else {
+          showResError((data && data.message) || 'Unable to send OTP. Please check the mobile number.');
+        }
+      } catch (err) {
+        console.error('Reservation send OTP error:', err);
+        showResError('Network error while requesting OTP. Please try again.');
+      } finally {
+        if (btnResProceed) {
+          btnResProceed.disabled = false;
+          btnResProceed.textContent = 'PROCEED TO VERIFY & BOOK →';
+        }
+      }
+    }
+
+    // Handle Step 2 -> Verify OTP and Confirm Booking
+    async function handleVerifyAndBook() {
+      hideResError();
+      const otp = resOtpInput ? resOtpInput.value.trim() : '';
+      if (!otp || otp.length < 4) {
+        showResError('Please enter the 4-digit OTP sent to your phone.');
+        if (resOtpInput) resOtpInput.focus();
+        return;
+      }
+
+      if (btnResVerify) {
+        btnResVerify.disabled = true;
+        btnResVerify.textContent = 'CONFIRMING TABLE...';
+      }
+
+      const payload = {
+        name: resGuestName ? resGuestName.value.trim() : '',
+        guests: resGuestCount ? parseInt(resGuestCount.value, 10) : 2,
+        date: resDateInput ? resDateInput.value : '',
+        time: resTimeSlot ? resTimeSlot.value : '',
+        mobile: '91' + resCurrentPhone,
+        otp: otp,
+        verificationToken: resVerificationToken,
+        specialRequests: resSpecialRequests ? resSpecialRequests.value.trim() : ''
+      };
+
+      try {
+        const res = await fetch('/api/book-table', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (data && data.success) {
+          clearInterval(resResendInterval);
+          if (resStepOtp) resStepOtp.style.display = 'none';
+          if (resStepConfirmed) resStepConfirmed.style.display = 'block';
+
+          if (resPillStep2) resPillStep2.className = 'res-step-pill completed';
+          if (resPillStep3) resPillStep3.className = 'res-step-pill completed';
+
+          const bkg = data.booking || {};
+          if (resConfirmedBookingId) resConfirmedBookingId.textContent = bkg.bookingId || 'ABNL-RES';
+          if (resSumName) resSumName.textContent = bkg.name || payload.name;
+          if (resSumGuests) resSumGuests.textContent = `${bkg.guests || payload.guests} Guests`;
+          if (resSumDate) resSumDate.textContent = bkg.date || payload.date;
+          if (resSumTime) resSumTime.textContent = bkg.time || payload.time;
+          if (resSumMobile) resSumMobile.textContent = `+91 ${resCurrentPhone}`;
+
+          const waText = encodeURIComponent(`Hi Absolute Bar & Lounge, I have reserved a table (${bkg.bookingId || 'ABNL-RES'}) for ${bkg.guests || payload.guests} guests on ${bkg.date || payload.date} at ${bkg.time || payload.time}. Name: ${bkg.name || payload.name}.`);
+          if (resWhatsappShareBtn) {
+            resWhatsappShareBtn.href = `https://wa.me/918110003883?text=${waText}`;
+          }
+
+          showToast('Table Reservation Confirmed!');
+        } else {
+          if (data && data.verificationToken) {
+            resVerificationToken = data.verificationToken;
+          }
+          showResError((data && data.message) || 'Verification failed. Please check the code.');
+          if (resOtpInput) resOtpInput.select();
+        }
+      } catch (err) {
+        console.error('Reservation booking error:', err);
+        showResError('Network error while confirming booking. Please try again.');
+      } finally {
+        if (btnResVerify) {
+          btnResVerify.disabled = false;
+          btnResVerify.textContent = 'VERIFY & CONFIRM TABLE';
+        }
+      }
+    }
+
+    // Handle Resend OTP in Reservation Modal
+    async function handleResendReservationOtp() {
+      hideResError();
+      if (!resCurrentPhone) return;
+
+      if (btnResResendOtp) {
+        btnResResendOtp.disabled = true;
+        btnResResendOtp.textContent = 'Sending...';
+      }
+
+      try {
+        const res = await fetch('/api/resend-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            mobile: '91' + resCurrentPhone,
+            verificationToken: resVerificationToken
+          })
+        });
+        const data = await res.json();
+
+        if (data && data.success) {
+          if (data.verificationToken) {
+            resVerificationToken = data.verificationToken;
+          }
+          showToast('New OTP sent via SMS!');
+          startResResendTimer();
+        } else {
+          showResError((data && data.message) || 'Could not resend OTP. Please wait.');
+        }
+      } catch (err) {
+        console.error('Reservation resend OTP error:', err);
+        showResError('Network error resending OTP.');
+      } finally {
+        if (btnResResendOtp) {
+          btnResResendOtp.disabled = false;
+          btnResResendOtp.textContent = 'Resend OTP';
+        }
+      }
+    }
+
+    // Event Listeners for Reservation
+    if (heroBookTableBtn) heroBookTableBtn.addEventListener('click', openReservationModal);
+    if (headerBookBtn) headerBookBtn.addEventListener('click', openReservationModal);
+    if (fabBookBtn) fabBookBtn.addEventListener('click', openReservationModal);
+    if (btnResCloseModal) btnResCloseModal.addEventListener('click', closeReservationModal);
+    if (btnResDone) btnResDone.addEventListener('click', closeReservationModal);
+
+    if (btnResProceed) btnResProceed.addEventListener('click', handleProceedReservation);
+    if (btnResVerify) btnResVerify.addEventListener('click', handleVerifyAndBook);
+    if (btnResResendOtp) btnResResendOtp.addEventListener('click', handleResendReservationOtp);
+
+    if (btnResChangePhone || btnResBackToDetails) {
+      const backHandler = () => {
+        clearInterval(resResendInterval);
+        if (resStepDetails) resStepDetails.style.display = 'block';
+        if (resStepOtp) resStepOtp.style.display = 'none';
+        if (resPillStep1) resPillStep1.className = 'res-step-pill active';
+        if (resPillStep2) resPillStep2.className = 'res-step-pill';
+        hideResError();
+        if (resMobileInput) resMobileInput.focus();
+      };
+      if (btnResChangePhone) btnResChangePhone.addEventListener('click', backHandler);
+      if (btnResBackToDetails) btnResBackToDetails.addEventListener('click', backHandler);
+    }
+
+    if (resModalOverlay) {
+      resModalOverlay.addEventListener('click', (e) => {
+        if (e.target === resModalOverlay) {
+          closeReservationModal();
+        }
+      });
+    }
+
+    if (resGuestName) {
+      resGuestName.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); handleProceedReservation(); }
+      });
+    }
+    if (resMobileInput) {
+      resMobileInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); handleProceedReservation(); }
+      });
+    }
+    if (resOtpInput) {
+      resOtpInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); handleVerifyAndBook(); }
+      });
+      resOtpInput.addEventListener('input', (e) => {
+        const val = e.target.value.replace(/\D/g, '');
+        e.target.value = val;
+        if (val.length === 4) {
+          handleVerifyAndBook();
+        }
+      });
+    }
+
+    // Connect Dineout buttons to direct reservation modal
+    if (dineoutBtn) {
+      dineoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openReservationModal();
+      });
+    }
     if (footerDineoutBtn) {
       footerDineoutBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        showToast('Dineout table booking is coming soon!');
+        openReservationModal();
       });
     }
 
